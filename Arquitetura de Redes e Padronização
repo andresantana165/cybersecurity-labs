@@ -1,0 +1,71 @@
+# 🌐 Arquitetura de Redes & Padronização
+**Documentação Técnica: Modelo OSI, Pilha TCP/IP e Metodologia de Troubleshooting**
+
+---
+
+## 1. Contexto Histórico: Do Modelo Proprietário ao Padrão Aberto
+
+Nos primórdios das redes de computadores, cada fabricante (*vendor*) desenvolvia seus próprios protocolos de comunicação. Esse modelo **proprietário** impunha fortes limitações operacionais às organizações, gerando o fenômeno de *vendor lock-in* — em que equipamentos de marcas distintas eram incapazes de interoperar.
+
+Para resolver essa fragmentação, entidades internacionais como a **ISO** (*International Organization for Standardization*) e a **IETF** (*Internet Engineering Task Force*) estabeleceram arquiteturas padronizadas de código aberto. Essa normatização permitiu a expansão global da Internet e a integração de ecossistemas heterogêneos.
+
+> 💡 **Definição Prática:** Um *Protocolo* é um conjunto de regras e convenções formais que governa a troca de dados entre dispositivos. O *Modelo OSI* atua como uma referência conceitual modular, enquanto a *Pilha TCP/IP* representa a implementação prática utilizada na Internet.
+
+---
+
+## 2. O Modelo de Referência OSI (7 Camadas)
+
+Lançado formalmente em 1984 pela ISO, o Modelo OSI (*Open Systems Interconnection*) divide o fluxo de comunicação em 7 camadas independentes. À medida que os dados trafegam da Camada 7 à Camada 1, ocorre o processo de **Encapsulamento**, onde cada nível adiciona informações de controle chamadas *headers* (cabeçalhos). No destino, é executado o **Desencapsulamento** inverso.
+
+| Camada | Nome | PDU | Função Principal | Ativos / Tecnologias |
+| :---: | :--- | :---: | :--- | :--- |
+| **L7** | **Aplicação** | Dados | Interface direta entre a aplicação do usuário e os serviços de rede. | WAF, Proxy, HTTP, DNS |
+| **L6** | **Apresentação** | Dados | Formatação, sintaxe, criptografia e compressão dos dados. | SSL/TLS, JPEG, JSON, PNG |
+| **L5** | **Sessão** | Dados | Estabelecimento, gerenciamento e encerramento de sessões lógicas. | RPC, NFS, NetBIOS, SMB |
+| **L4** | **Transporte** | Segmento / Datagrama | Controle de fluxo, multiplexação de portas e garantia de entrega. | Stateful Firewall, TCP, UDP |
+| **L3** | **Rede** | Pacote | Endereçamento lógico (IP) e determinação da melhor rota (roteamento). | Roteador, Switch L3, FortiGate |
+| **L2** | **Enlace** | Quadro (*Frame*) | Endereçamento físico (MAC) e controle de acesso ao meio local. | Switch L2, AP, Bridge, VLAN |
+| **L1** | **Física** | Bits | Transmissão de sinais elétricos, ópticos ou de rádio no meio físico. | Hub, Cabo UTP, Fibra, SFP |
+
+---
+
+## 3. Tabela de Portas e Protocolos Principais
+
+A Camada de Transporte (L4) utiliza portas lógicas para direcionar o tráfego aos serviços corretos na Camada de Aplicação.
+
+| Serviço / Protocolo | Transporte | Porta(s) | Descrição Operacional |
+| :--- | :---: | :---: | :--- |
+| **FTP** | TCP | 20, 21 | Transferência de arquivos (Porta 21 para controle, 20 para dados). |
+| **SSH / SFTP** | TCP | 22 | Acesso remoto seguro e transferência criptografada de arquivos. |
+| **Telnet** | TCP | 23 | Acesso remoto legado via texto plano (inseguro). |
+| **SMTP** | TCP | 25 / 587 | Envio e roteamento de e-mails entre servidores. |
+| **DNS** | TCP / UDP | 53 | Resolução de nomes de domínio em endereços IP. |
+| **DHCP** | UDP | 67, 68 | Atribuição dinâmica de configurações de IP para clientes. |
+| **TFTP** | UDP | 69 | Transferência simples e rápida de arquivos (sem autenticação). |
+| **HTTP** | TCP | 80 | Navegação na Web não criptografada. |
+| **POP3** | TCP | 110 | Download de e-mails da caixa de entrada do servidor para o cliente. |
+| **NTP** | UDP | 123 | Sincronização precisa de relógios dos ativos de rede. |
+| **IMAP** | TCP | 143 | Sincronização bidirecional de e-mails em múltiplos dispositivos. |
+| **SNMP** | UDP | 161, 162 | Monitoramento e coleta de métricas de hardware (Zabbix/Grafana). |
+| **LDAP / LDAPS** | TCP / UDP | 389 / 636 | Consulta a serviços de diretório corporativo (Active Directory). |
+| **HTTPS** | TCP | 443 | Navegação na Web segura com criptografia TLS/SSL. |
+| **SMB** | TCP | 445 | Compartilhamento de arquivos e impressoras em redes Windows. |
+
+---
+
+## 4. Comparativo: Modelo OSI vs. Modelo TCP/IP
+
+```text
+  MODELO OSI (7 Camadas)        MODELO TCP/IP (5 Camadas)      MODELO TCP/IP (4 Camadas)
++------------------------+    +--------------------------+    +--------------------------+
+|  7. Aplicação          |    |                          |    |                          |
+|  6. Apresentação       | -> |  5. Aplicação            | -> |  4. Aplicação            |
+|  5. Sessão             |    |                          |    |                          |
++------------------------+    +--------------------------+    +--------------------------+
+|  4. Transporte         | -> |  4. Transporte           | -> |  3. Transporte           |
++------------------------+    +--------------------------+    +--------------------------+
+|  3. Rede               | -> |  3. Rede / Internet      | -> |  2. Internet             |
++------------------------+    +--------------------------+    +--------------------------+
+|  2. Enlace             | -> |  2. Enlace               | -> |  1. Acesso à Rede        |
+|  1. Física             |    |  1. Física               |    |     (Network Access)     |
++------------------------+    +--------------------------+    +--------------------------+
