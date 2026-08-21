@@ -1,0 +1,18 @@
+Assunto: 🛠️ Reparo de Arquivos e Imagem do Sistema Windows
+
+📌 Introdução
+Com o uso contínuo do computador, o sistema operacional pode sofrer com travamentos, lentidão, erros de inicialização ou falhas em programas. Esses problemas geralmente acontecem quando arquivos vitais do Windows são corrompidos por desligamentos incorretos, quedas de energia, atualizações interrompidas ou infecções por vírus. Para solucionar essas falhas sem precisar formatar a máquina, o próprio Windows disponibiliza ferramentas nativas de diagnóstico e restauração que operam via linha de comando no Prompt de Comando (CMD) ou PowerShell.
+
+⚙️ Para que servem esses comandos?
+
+🌐 DISM (DISM /Online /Cleanup-Image /RestoreHealth)
+
+🎯 Finalidade: O Deployment Image Servicing and Management (Gerenciamento e Manutenção de Imagens de Implantação) serve para reparar a "imagem base" do Windows.
+
+🔍 Como funciona: Ele verifica a pasta de componentes do sistema e baixa arquivos originais diretamente dos servidores da Microsoft (via Windows Update) para substituir os que estão danificados no repositório local. Ele constrói a fundação sólida necessária para que o sistema volte a funcionar.
+
+🛡️ SFC (sfc /scannow)
+
+🎯 Finalidade: O System File Checker (Verificador de Arquivos do Sistema) serve para examinar e recuperar os arquivos operacionais protegidos do Windows.
+
+🔍 Como funciona: Ele escaneia todos os arquivos vitais do computador (como DLLs e arquivos de inicialização). Se encontrar algo corrompido ou ausente, ele substitui automaticamente esse arquivo usando como fonte a imagem limpa que o comando DISM corrigiu anteriormente.
