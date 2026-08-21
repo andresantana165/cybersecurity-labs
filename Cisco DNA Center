@@ -1,0 +1,46 @@
+Cisco DNA Center / Cisco Catalyst Center — Resumo
+
+O Cisco DNA Center, atualmente chamado de Cisco Catalyst Center, é uma plataforma centralizada utilizada para gerenciar, automatizar, monitorar e analisar redes Cisco.
+
+Ele faz parte do conceito de IBN (Intent-Based Networking), ou Rede Baseada em Intenção.
+
+O que é uma rede baseada em intenção?
+
+A ideia é que o administrador informe o que deseja que aconteça na rede, e a plataforma ajuda a configurar e aplicar essas regras automaticamente.
+
+Exemplo:
+Em vez de configurar manualmente vários switches, o administrador pode definir uma política, e o Cisco Catalyst Center ajuda a distribuir essa configuração para os equipamentos.
+
+Principais funções
+Gerenciamento centralizado: permite administrar diversos equipamentos de rede em um único painel.
+Automação: facilita a configuração e o provisionamento de dispositivos.
+SD-Access: permite controlar o acesso dos usuários e dispositivos utilizando políticas.
+Segmentação: ajuda a separar usuários, dispositivos e sistemas para aumentar a segurança.
+Assurance: monitora a rede e coleta informações de telemetria.
+IA e Machine Learning: ajudam a identificar problemas, analisar comportamentos e reduzir o tempo de troubleshooting.
+Análise de tráfego criptografado: auxilia na identificação de possíveis riscos mesmo em tráfegos criptografados.
+Cisco DNA Assurance
+
+O DNA Assurance é uma das partes mais importantes da plataforma.
+
+Ele coleta informações dos dispositivos da rede, como:
+
+desempenho;
+conectividade;
+falhas;
+comportamento dos usuários;
+qualidade da rede.
+
+Com essas informações, a plataforma utiliza Inteligência Artificial e Machine Learning para ajudar a identificar problemas e sugerir possíveis causas.
+
+Resumindo de forma bem simples
+
+O Cisco Catalyst Center é uma plataforma que centraliza o gerenciamento da rede Cisco. Ele permite automatizar configurações, aplicar políticas de segurança, monitorar dispositivos e utilizar inteligência artificial para identificar e resolver problemas mais rapidamente.
+
+Forma fácil de lembrar
+
+Cisco Catalyst Center = Gerenciar + Automatizar + Monitorar + Analisar + Proteger a rede.
+
+Fluxo básico:
+
+Dispositivos de Rede → Telemetria e informações → Cisco Catalyst Center → Análise/Automação/Políticas → Configurações aplicadas na rede
