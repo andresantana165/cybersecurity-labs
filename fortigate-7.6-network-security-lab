@@ -1,0 +1,35 @@
+# 🛡️ Laboratório Prático: FortiGate 7.6 + MikroTik + Linux (EVE-NG)
+
+Este projeto simula um ambiente de rede corporativa no **EVE-NG**. O objetivo principal é controlar quem pode (e o que pode) acessar a Internet através de políticas de segurança em um firewall **FortiGate (v7.6)**, utilizando um roteador **MikroTik** como extensão de portas (switch) e máquinas **Linux** para testes.
+
+---
+
+## 📌 1. Quem é Quem na Rede? (Topologia)
+
+Pense nesta rede como um prédio comercial:
+
+* 🌐 **Internet (WAN):** O mundo externo. Conectado na porta `port1` do FortiGate.
+* 🏰 **FortiGate 7.6 (O Portão de Segurança):** É o firewall e gateway (`172.16.20.1`). Tudo o que entra ou sai da rede precisa da autorização dele.
+* 🔌 **MikroTik (O Extensor / Switch L2):** Funciona como um "benjamim" ou régua de tomadas inteligente. Ele junta os computadores da rede e entrega o tráfego de forma transparente direto no FortiGate.
+* ⚔️ **Kali Linux (`172.16.20.20`):** Máquina de testes avançados. Neste lab, representa um usuário VIP com **acesso total** à Internet.
+* 🐧 **Tiny Core Linux (`172.16.20.30`):** Um sistema Linux ultra leve. Neste lab, representa um computador restrito que só pode **navegar na Web e consultar DNS**.
+
+---
+
+## ⚙️ 2. Configurando o MikroTik (Transformando em Switch)
+
+Por padrão, o MikroTik é um roteador. Para que ele funcione apenas como um **switch de camada 2** (repassando o sinal sem alterar os IPs), criamos uma **Bridge** (ponte) para unir as portas `eth1`, `eth2` e `eth3`.
+
+```routeros
+# Passo 1: Listar todas as portas físicas do MikroTik
+/interface print
+
+# Passo 2: Criar a "ponte" virtual (chamada bridge1) que vai unir as portas
+/interface bridge
+add name=bridge1
+
+# Passo 3: Colocar a porta do FortiGate (eth1) e dos PCs (eth2 e eth3) dentro dessa ponte
+/interface bridge port
+add bridge=bridge1 interface=eth1
+add bridge=bridge1 interface=eth2
+add bridge=bridge1 interface=eth3
