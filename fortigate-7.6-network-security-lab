@@ -33,3 +33,34 @@ add name=bridge1
 add bridge=bridge1 interface=eth1
 add bridge=bridge1 interface=eth2
 add bridge=bridge1 interface=eth3
+
+
+[ Internet / Nuvem (WAN) ]
+                           │
+                           │
+                         port1
+                           │
+                    ┌─────────────┐
+                    │  FortiGate  │ (Gateway: 172.16.20.1)
+                    └─────────────┘
+                         port2
+                           │
+                         eth1
+                           │
+                    ┌─────────────┐
+                    │  MikroTik   │ (Bridge L2 - Modo Switch)
+                    └─────────────┘
+                      eth2   eth3
+                       │       │
+                       │       │
+                     e0         e0
+                     │           │
+          ┌─────────────┐     ┌──────────────────┐
+          │ Kali Linux  │     │ Tiny Core Linux  │
+          │(172.16.20.20│     │  (172.16.20.30)  │
+          └─────────────┘     └──────────────────┘
+
+
+
+
+
